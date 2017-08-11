@@ -106,7 +106,6 @@ var IssueTable = function (_React$Component3) {
       var issueRows = this.props.issues.map(function (issue) {
         return React.createElement(IssueRow, { key: issue.id, issue: issue });
       });
-      // const borderedStyle = {border: "1px solid silver", padding: 6};
       return React.createElement(
         'table',
         { className: 'bordered-table' },
@@ -144,7 +143,7 @@ var IssueTable = function (_React$Component3) {
             React.createElement(
               'th',
               null,
-              'CompletionDate'
+              'Completion Date'
             ),
             React.createElement(
               'th',
@@ -189,11 +188,11 @@ var IssueAdd = function (_React$Component4) {
 }(React.Component);
 
 var issues = [{
-  id: 1, status: 'Open', owner: 'Justin',
+  id: 1, status: 'Open', owner: 'Ravan',
   created: new Date('2016-08-15'), effort: 5, completionDate: undefined,
-  title: 'Error in console when clicking add'
+  title: 'Error in console when clicking Add'
 }, {
-  id: 2, status: 'Assigned', owner: 'Pat',
+  id: 2, status: 'Assigned', owner: 'Eddie',
   created: new Date('2016-08-16'), effort: 14, completionDate: new Date('2016-08-30'),
   title: 'Missing bottom border on panel'
 }];
@@ -224,7 +223,7 @@ var IssueList = function (_React$Component5) {
     key: 'createTestIssue',
     value: function createTestIssue() {
       this.createIssue({
-        status: 'New', owner: 'streetEngineer', created: new Date(),
+        status: 'New', owner: 'Pieta', created: new Date(),
         title: 'Completion date should be optional'
       });
     }
