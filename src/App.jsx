@@ -50,9 +50,32 @@ class IssueTable extends React.Component {
 }
 
 class IssueAdd extends React.Component {
+  constructor () {
+    super ();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(e) {
+    e.preventDefault();
+    var form = document.forms.issueAdd;
+    this.props.createIssue({
+      owner: form.owner.value,
+      title: form.title.value,
+      status: "new",
+      created: new Date(),
+    });
+
+    form.owner.value = ""; form.title.value = "";
+
+  }
   render() {
     return (
-      <div>This is a placeholder for an Issue Add entry form.</div>
+    <div>
+      <form name= "issueAdd" onSubmit={this.handleSubmit}>
+        <input type="text" name="owner" placeholder= "Owner" />
+        <input type="text" name="title" placeholder= "title" />
+        <button>Add</button>
+      </form>
+      </div>
     )
   }
 }
@@ -73,9 +96,11 @@ const issues = [
 class IssueList extends React.Component {
   constructor() {
     super();
-    this.state= { issues: []};
-    this.createTestIssue = this.createTestIssue.bind(this);
-    setTimeout(this.createTestIssue.bind(this), 2000);
+    this.state= { issues: [] };
+    // this.createTestIssue = this.createTestIssue.bind(this);
+    // setTimeout(this.createTestIssue.bind(this), 2000);
+    this.createIssue = this.createIssue.bind(this);
+
 
   }
   componentDidMount() {
@@ -95,12 +120,13 @@ class IssueList extends React.Component {
     this.setState({ issues: newIssues });
   }
 
-  createTestIssue() {
-    this.createIssue({
-      status: 'New', owner: 'streetEngineer', created: new Date(),
-      title: 'Completion date should be optional',
-    });
-  }
+  // createTestIssue() {
+  //   this.createIssue({
+  //     status: 'New', owner: 'streetEngineer', created: new Date(),
+  //     title: 'Completion date should be optional',
+  //   });
+  // }
+
   render() {
     return (
       <div>
@@ -109,8 +135,7 @@ class IssueList extends React.Component {
         <hr />
         <IssueTable issues={this.state.issues} />
         <hr />
-        <IssueAdd />
-        <button onClick={this.createTestIssue}>Add</button>
+        <IssueAdd  createIssue={this.createIssue} />
       </div>
     );
   }
